@@ -2,8 +2,10 @@ name: Agente Buscador de Licitaciones
 
 on:
   schedule:
+    # Se ejecuta de lunes a viernes a las 12:00 UTC (9:00 AM en Chile)
     - cron: '0 12 * * 1-5'
 
+  # Permite ejecutarlo manualmente con un botón
   workflow_dispatch:
 
 jobs:
@@ -24,6 +26,7 @@ jobs:
 
       - name: Ejecutar agente buscador
         env:
+          # Inyecta los secretos guardados en GitHub
           MERCADO_PUBLICO_TICKET: ${{ secrets.MERCADO_PUBLICO_TICKET }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
